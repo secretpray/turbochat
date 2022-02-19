@@ -4,6 +4,10 @@ module ApplicationHelper
   end
 
   def room_name(room)
-    room.name ||= room.title
+    title = room.name ||= room.title
+    content_tag(:span, title.capitalize, class: ["font-bold", "text-gray-200", "capitalize"])
+    .concat content_tag(:span, " (in #{room.favorites_count} Favorites)",
+                        class: ["font-light", "italic", "text-gray-300", "text-sm"],
+                        id: "room_#{room.id}_favorites_count")
   end
 end

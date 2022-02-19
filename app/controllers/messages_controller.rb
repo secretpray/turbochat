@@ -1,4 +1,7 @@
 class MessagesController < ApplicationController
+  before_action :set_message, only: :like
+  before_action :set_like, only: :like
+
   def create
     @new_message = current_user.messages.build(strong_params)
 
@@ -9,15 +12,7 @@ class MessagesController < ApplicationController
   end
 
   def like
-    @message = Message.find(params[:id])
-    like = @message.likes.find_by(user: current_user)
-
-    if like.present?
-      like.destroy
-    else
-      @message.likes.create(user: current_user)
-    end
-
+    @like.present? ? @like.destroy : @message.likes.create(user: current_user)
     room = @message.room
 
     @message.broadcast_replace_to [current_user, room], target: "message_like_#{@message.id}", partial: "messages/heart", locals: { user: current_user, message: @message.decorate }
@@ -25,6 +20,14 @@ class MessagesController < ApplicationController
   end
 
   private
+
+  def set_message
+    @message = Message.find(params[:id])
+  end
+
+  def set_like
+    @like = @message.likes.find_by(user: current_user)
+  end
 
   def strong_params
     params.require(:message).permit(:body, :room_id)
