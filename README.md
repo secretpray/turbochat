@@ -42,6 +42,11 @@
   
   https://user-images.githubusercontent.com/17977331/153777545-1482caec-b894-418c-92e1-e6b4dda8708d.mov
   
+  5 stage (Favorites)
+  
+  https://user-images.githubusercontent.com/17977331/154814541-ff5928f4-aaf8-4343-9821-97a8c33185f5.mov
+
+  
 </details>
 
 <details>
