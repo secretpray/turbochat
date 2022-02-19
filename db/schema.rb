@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_15_112103) do
+ActiveRecord::Schema.define(version: 2022_02_19_082903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 2022_02_15_112103) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "room_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_favorites_on_room_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
   create_table "likes", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "message_id", null: false
@@ -69,6 +78,7 @@ ActiveRecord::Schema.define(version: 2022_02_15_112103) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
+    t.integer "favorites_count"
     t.index ["name"], name: "index_rooms_on_name"
     t.index ["user_id"], name: "index_rooms_on_user_id"
   end
@@ -87,6 +97,8 @@ ActiveRecord::Schema.define(version: 2022_02_15_112103) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "favorites", "rooms"
+  add_foreign_key "favorites", "users"
   add_foreign_key "likes", "messages"
   add_foreign_key "likes", "users"
   add_foreign_key "messages", "rooms"

@@ -1,8 +1,13 @@
 <%= turbo_stream_from @room %>
 <%= turbo_stream_from [current_user, @room] %>
 
-<div class="mt-2 mb-3" id='<%= dom_id(@room)%>_online_users_count'>
-  <%= render 'rooms/user_online_count', count: @room.online_room_users_count %>
+<div class="flex justify-between">
+  <div class="mt-2 mb-3" id='<%= dom_id(@room)%>_online_users_count'>
+    <%= render 'rooms/user_online_count', count: @room.online_room_users_count %>
+  </div>
+  <div class="flex flex-col mt-6" id='room_<%= @room.id %>_favorite_section'>
+    <%= render 'favorite_room', room: @room, user: current_user %>
+  </div>
 </div>
 
 <div class="flex flex-col justify-between h-grow">

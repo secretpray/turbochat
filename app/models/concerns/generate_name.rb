@@ -1,19 +1,20 @@
 module GenerateName
   extend ActiveSupport::Concern
 
-  def generate_random_name
-    attempts = 0
-    while attempts < 10 do
-      attempts += 1
-      random_name = RandomUsername.noun(:min_length => 4, :max_length => 8)
-      # random_name = RandomUsername.adjective(:min_length => 4, :max_length => 8)
-      next if check_uniq_name(random_name)
+  MAX_COUNT = 12
 
-      update(name: random_name)
-    end
+  def generate_random_name(count = 0)
+    return if count > MAX_COUNT # logger.debug "Generate try count: #{count} (in MAX_COUNT: #{MAX_COUNT})"
+
+    random_name = RandomUsername.noun(:min_length => 4, :max_length => 8)
+    return generate_random_name(count.next) if not_uniq_name?(random_name)
+
+    update(name: random_name)
   end
 
-  def check_uniq_name(name)
+  private
+
+  def not_uniq_name?(name)
     Room.where(name: name).present?
   end
 end

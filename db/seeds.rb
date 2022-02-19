@@ -8,6 +8,7 @@ puts '*' * 80
 Message.destroy_all
 Room.destroy_all
 Like.destroy_all
+Favorite.destroy_all
 User.destroy_all
 
 puts 'Create new records'
@@ -77,11 +78,21 @@ while likes < MAX_LIKES_COUNT do
   print '.'
 end
 
+# add favorite
+User.all.each do |user|
+  room_ids = Room.pluck(:id)
+  room_ids.sample(rand(1..room_ids.size)).each do |room_id|
+    user.favorites.create(room_id: room_id)
+    print '.'
+  end
+end
+
 puts ' '
 puts ' '
 puts "That's all folks!"
 puts '*' * 80
 p "Created #{Room.count} #{'room'.pluralize(Room.count)}"
 p "Created #{Message.count} #{'message'.pluralize(Message.count)}"
+p "Created #{Favorite.count} #{'favorite'.pluralize(Favorite.count)}"
 p "Created #{Like.count} #{'like'.pluralize(Like.count)}"
 p "Created #{User.count} #{'user'.pluralize(User.count)}"
