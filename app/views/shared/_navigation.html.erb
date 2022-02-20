@@ -3,9 +3,13 @@
     <div class="flex items-center h-16">
       <div class="flex items-center justify-between w-full">
         <div class="flex-shrink-0">
-          <a href="/">
-            <img class="h-8 w-8" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow">
+          <a class='flex' href="<%= root_path %>" data-turbo-frame='rooms'>
+            <img class="h-8 w-8" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Home">
+            <span class='ml-2 font-bold text-gray-400 text-xl tracking-wider hover:text-gray-300'>Chat</span>
           </a>
+        </div>
+        <div class="">
+          <%= render 'shared/navigation_clock' %>
         </div>
         <div class="hidden md:block">
           <% if user_signed_in? %>
