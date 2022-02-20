@@ -10,9 +10,7 @@
   <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 </head>
 <body class="flex flex-col h-screen antialiased"
-        data-controller='modal-user'
-        data-controller-name='<%= controller_name %>'
-        data-action-name='<%= action_name %>'>
+        data-controller='modal-user'>
   <%= render 'shared/navigation' %>
   <%= render 'shared/header' %>
   <main class="mx-auto max-w-7xl w-full flex flex-col justify-center align-center py-6 sm:px-6 lg:px-8">
