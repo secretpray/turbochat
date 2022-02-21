@@ -2,7 +2,7 @@ import consumer from "./consumer"
 
 consumer.subscriptions.create("RoomChannel", {
   connected() {
-    console.log('Connected!')
+    // console.log('Connected!')
     // Called when the subscription is ready for use on the server
   },
 

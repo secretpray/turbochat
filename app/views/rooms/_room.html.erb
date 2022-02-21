@@ -1,7 +1,20 @@
 <%= turbo_frame_tag dom_id(room), class: "",
                                   data: { controller_name: "#{controller_name}",
                                   action_name: "#{action_name}" } do %>
-  <%= link_to room_name(room), room_path(room.title),
-                               class: "text-current text-blue-500 mr-4 bg-gray-800 py-3 px-4 rounded-md mt-4",
-                               data: { turbo_frame: :rooms }  %>
+  <%= link_to room_path(room.title),
+                               class: "text-current mr-4 bg-gray-100 opacity-75 py-3 px-4 rounded-md mt-4 hover:opacity-100",
+                               data: { turbo_frame: :rooms } do %>
+     <span class='relative'>
+       <%= room_name(room) %>
+       <% if user.favorited?(room) %>
+         <svg class='absolute' style="top: -10px;right: -24px;" fill="blue" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve" stroke="currentColor" version="1.1" heigh="24px" width="24px">
+           <g>
+             <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)">
+             <path d="M2343.3,5006.2c-381-65.1-721.8-323.5-896-681.6c-130.2-268-122.5,46-122.5-4705.8c0-3869.2,3.8-4313.4,30.6-4351.7c15.3-23,49.8-42.1,74.7-42.1c30.6,0,662.4,409.7,1734.5,1125.7l1688.6,1123.8h145.5h145.5l1686.7-1123.8C8004.5-4432.2,8531-4775,8567.3-4775c118.7,0,111-335,105.3,4453.1l-5.7,4363.1l-51.7,139.8c-70.9,193.4-157,335-292.9,472.9c-137.8,141.7-292.9,237.4-497.8,310.2l-153.2,53.6l-2613.3,1.9C3604.9,5021.6,2400.7,5015.8,2343.3,5006.2z M7317.1,3767.6c36.4-19.1,82.3-65.1,99.6-101.5c32.5-61.3,34.5-250.8,34.5-3162.7v-3095.7l-836.6,559c-461.4,306.3-882.6,578.2-938.1,603.1c-201,91.9-348.4,124.5-618.4,134c-300.6,11.5-495.9-24.9-733.3-134c-76.6-36.4-501.6-306.3-947.7-603.1c-444.2-296.7-811.8-539.9-817.5-539.9c-5.7,0-9.6,1389.9-9.6,3088.1c0,2900.5,1.9,3090,34.5,3151.3c17.2,36.4,63.2,82.3,99.6,101.5c63.2,32.5,170.4,34.5,2316.5,34.5C7146.8,3802,7254,3800.1,7317.1,3767.6z"/>
+             </g>
+           </g>
+        </svg>
+      <% end %>
+     </span>
+  <% end %>
 <% end %>

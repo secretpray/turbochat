@@ -10,7 +10,8 @@ class RegistrationsController < Devise::RegistrationsController
       if @user.update(user_params)
         flash.now[:notice] = "User with '#{@user.email}' updated!"
         format.turbo_stream
-        format.html { redirect_to account_path(@user) }
+        format.html { redirect_to root_path }
+        # format.html { redirect_to account_path(@user) }
       else
         # flash.now[:alert] = @post.errors.full_messages.join('. ')
         format.turbo_stream
