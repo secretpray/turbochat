@@ -5,7 +5,7 @@
 </div>
 
 <%= turbo_frame_tag :rooms, class: 'text-center mt-12' do %>
-  <%= render partial: "rooms/room", collection: @rooms, locals: {user: current_user} %>
+  <%= render partial: "rooms/room", collection: @rooms, locals: { user: current_user } %>
   <%#= render @rooms %>
 
   <%= form_with model: @new_room, class: "mt-12" do |f| %>

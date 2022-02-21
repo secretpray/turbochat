@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
   def index
-    @rooms = Room.all
+    @rooms = Room.order(created_at: :desc)
     @new_room = Room.new
   end
 
@@ -20,9 +20,7 @@ class RoomsController < ApplicationController
     @new_room = Room.new(user: current_user)
 
     if @new_room.save
-      @new_room.broadcast_append_to :rooms, partial: "rooms/room", locals: { user: current_user, room: @new_room }
+      @new_room.broadcast_prepend_to :rooms, partial: "rooms/room", locals: { user: current_user, room: @new_room }
     end
   end
-
-
 end
