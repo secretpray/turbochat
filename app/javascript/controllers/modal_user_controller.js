@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   // form_frame -> for SRC, user_modal_form -> close modal, container_form - close by click background
-  static targets = ['form_frame', 'user_modal_form', 'container_form']
+  static targets = ['form_frame', 'user_modal_form', 'container_form', 'close_form' ]
 
   // close modal by click on background
   closeFromBackground(event) {
@@ -20,7 +20,8 @@ export default class extends Controller {
   close(event) {
     event && event.preventDefault()
     // event.stopPropagation()
-    this.user_modal_formTarget.remove()
-    this.form_frameTarget.src = ''
+    if (this.hasClose_formTarget) {
+      this.close_formTarget.click()
+    }
   }
 }

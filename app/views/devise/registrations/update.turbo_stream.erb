@@ -2,6 +2,6 @@
   <%= turbo_stream.replace "profile_form", partial: 'devise/registrations/form', locals: { resource: @user } %>
 <% else %>
   <%= render_flash %>
-  <%= turbo_stream.replace "user_#{@user.id}", partial: 'users/user', locals: { user: @user } %>
-  <%= turbo_stream.update('user_modal', nil) %>
+  <%= turbo_stream.update :rooms, target: "user_#{@user.id}", partial: 'users/user', locals: { profile_user: @user, user: current_user } %>
+  <%#= turbo_stream.update('user_modal', nil) %>
 <% end %>
