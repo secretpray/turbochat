@@ -52,6 +52,10 @@ end
 #create Users
 USER_EMAIL.each { |email| create_user(email) }
 
+# set admin
+User.where(email: 'admin@example.com').update(role: 2)
+print '.'
+
 #create rooms
 MAX_ROOM_COUNT.times do
   User.all.sample.rooms.create!

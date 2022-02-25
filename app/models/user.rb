@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  enum role: %i[user moderator admin]
   has_many :rooms, dependent: :destroy
   has_many :messages, -> { sorted }, dependent: :destroy
   has_many :likes, dependent: :destroy
