@@ -6,7 +6,7 @@
                                data: { turbo_frame: :rooms } do %>
      <span class='relative'>
        <%= room_name(room) %>
-       <% if user.favorited?(room) %>
+       <% if user&.favorited?(room) %>
          <svg class='absolute' style="top: -10px;right: -24px;" fill="blue" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve" stroke="currentColor" version="1.1" heigh="24px" width="24px">
            <g>
              <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)">

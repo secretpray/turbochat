@@ -15,7 +15,8 @@
   <%= render 'shared/header' %>
   <main class="mx-auto max-w-7xl w-full flex flex-col justify-center align-center py-6 sm:px-6 lg:px-8">
     <!-- Flash container -->
-    <%= turbo_frame_tag :flash %>
+    <%= render 'shared/flash' %>
+    <!-- Main app container -->
     <%= yield %>
   </main>
 </body>

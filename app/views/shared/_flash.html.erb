@@ -1,11 +1,11 @@
-<div id="flash">
+<div id="flash_container">
   <% flash.each do |type, message| %>
     <div class="fixed inset-x-0 top-0 flex items-end justify-right px-4 py-5 sm:p-5 justify-end z-30 pointer-events-none">
       <div
           data-controller="alert"
-          data-alert-show-class="translate-x-0 opacity-100"
+          data-alert-show-class="translate-x-0 opacity-75"
           data-alert-hide-class="translate-x-full opacity-0"
-          class="max-w-sm w-full shadow-lg px-4 py-2 rounded relative bg-transparent border-l-8 border-yellow-500 text-white pointer-events-auto transition translate-x-full transform ease-in-out duration-1000 opacity-0">
+          class="max-w-sm w-full shadow-lg px-4 py-2 rounded relative bg-white border-l-8 border-yellow-500 text-gray-700 pointer-events-auto transition translate-x-full transform ease-in-out duration-1000 opacity-0">
         <div class="p-2">
           <div class="flex items-start">
             <div class="ml-3 w-0 flex-1 pt-0.5">
