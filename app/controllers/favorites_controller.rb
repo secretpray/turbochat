@@ -28,7 +28,7 @@ class FavoritesController < ApplicationController
   end
 
   def render_turbo_template
-    @room.broadcast_update_to(@room, target: "room_#{@room.id}_favorite_section",
+    @room.broadcast_update_to([current_user, :rooms], target: "room_#{@room.id}_favorite_section",
                               partial: 'rooms/favorite_room',
                               locals: {room: @room, user: current_user})
   end
