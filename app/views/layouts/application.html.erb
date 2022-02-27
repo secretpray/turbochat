@@ -15,7 +15,9 @@
   <%= render 'shared/header' %>
   <main class="mx-auto max-w-7xl w-full flex flex-col justify-center align-center py-6 sm:px-6 lg:px-8">
     <!-- Flash container -->
-    <%= render 'shared/flash' %>
+    <div id="flash_container">
+      <%= render 'shared/flash' %>
+    </div>
     <!-- Main app container -->
     <%= yield %>
   </main>

@@ -2,7 +2,6 @@
             html: { method: :put,
                     id: "profile_form",
                     class: 'flex flex-col space-y-5 mx-4',
-                    # data: { turbo_frame: :_top, turbo_frame_target: :rooms } }) do |f|
                     data: { turbo_frame: :rooms } }) do |f| %>
   <div class="flex justify-between items-center">
     <h2 class="ml-2 font-bold text-gray-300 text-2xl">Editing Profile</h2>
@@ -13,7 +12,7 @@
   <div class="w-full">
     <div class="grid grid-flow-col">
       <div class="grid-cols-1 mx-auto">
-        <%= image_tag(current_user.profile_avatar, class: 'rounded-full') if current_user.avatar.attached? %>
+        <%= image_tag(resource.profile_avatar, class: 'rounded-full') if resource.avatar.attached? %>
         <%#= AvatarPresenter.call(current_user, 100) %>
       </div>
 
@@ -66,10 +65,6 @@
     <%= f.submit "Update",
         id: 'submit-user-modal',
         class: " p-2 px-5 bg-transparent border-2 border-grey-300 text-grey-300 text-lg filter saturate-150 contrast-75 opacity-50 rounded-lg hover:border-yellow-400 hover:text-yellow-400 hover:opacity-100 focus:border-4 focus:border-yellow-300 focus:opacity-90 transition duration-300 cursor-pointer" %>
-    <%#= link_to "◄ Back", "javascript:void(0);",
-                data: { action: 'modal-user#close', turbo_frame: :rooms },
-                class: "rounded-lg py-3 px-5 text-yellow-400 filter saturate-150 contrast-75 font-medium hover:text-yellow-500",
-                style: "color: rgb(106, 90, 205);" %>
     <%= link_to "Back", account_path(resource),
                 data: { turbo_frame: :rooms,
                         modal_user_target: 'close_form' },

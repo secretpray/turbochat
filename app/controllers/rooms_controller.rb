@@ -1,14 +1,13 @@
 class RoomsController < ApplicationController
 
   def index
-    @rooms = Room.order(created_at: :desc)
+    @rooms = Room.common.recent
     @new_room = Room.new
   end
 
   def favorites
     @rooms = Room.favorited_by(current_user&.email)
     @new_room = Room.new
-    # render :index
   end
 
   def show
@@ -18,7 +17,7 @@ class RoomsController < ApplicationController
   end
 
   def create
-    return if not_autorize?
+    return if not_autorize_common? || not_autorize_personal?
 
     @new_room = Room.new(user: current_user)
 
@@ -31,12 +30,16 @@ class RoomsController < ApplicationController
 
   private
 
-  def not_autorize?
-    unless current_user&.admin?
+  def not_autorize_common?
+    unless current_user&.admin? && params.dig(:chat_room).blank?
       flash.now[:alert] = "Not autorized!"
       turbo_render_flash(flash)
       return true
     end
+  end
+
+  def not_autorize_personal?
+    return params.dig(:chat_room).present?
   end
 
   def turbo_render_flash(flash)
