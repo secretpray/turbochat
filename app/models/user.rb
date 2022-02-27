@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  enum role: %i[user moderator admin]
   has_many :rooms, dependent: :destroy
   has_many :messages, -> { sorted }, dependent: :destroy
   has_many :likes, dependent: :destroy
@@ -10,6 +9,8 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  enum role: %i[user moderator admin].freeze, _default: 0
 
   after_commit :add_default_avatar, on: %i[create update]
 

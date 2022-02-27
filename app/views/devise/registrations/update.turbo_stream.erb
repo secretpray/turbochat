@@ -1,7 +1,17 @@
 <% if @user.errors.any? %>
-  <%= turbo_stream.replace "profile_form", partial: 'devise/registrations/form', locals: { resource: @user } %>
+  <%= turbo_stream.replace "profile_form",
+                          partial: 'devise/registrations/form',
+                          locals: { resource: @user } %>
+<%= render_flash %>                          
 <% else %>
-  <%= render_flash %>
-  <%= turbo_stream.update :rooms, target: "user_#{@user.id}", partial: 'users/user', locals: { profile_user: @user, user: current_user } %>
-  <%#= turbo_stream.update('user_modal', nil) %>
+  <%= turbo_stream.update :rooms,
+                          target: "user_#{@user.id}",
+                          partial: 'users/user',
+                          locals: { profile_user: @user, user: current_user } %>
+
+<%= render_flash %>
+<%= Turbo::StreamsChannel.broadcast_update_later_to(:rooms,
+                          target: "nav_item_user_#{@user.id}",
+                          partial: "shared/nav_user_data",
+                          locals: { user: current_user }) %>
 <% end %>

@@ -32,7 +32,7 @@ class RoomChannel < ApplicationCable::Channel
   def update_online_user_count
     @room.broadcast_update_to(@room, target: "room_#{@room.id}_online_users_count",
                             partial: "rooms/user_online_count",
-                            locals: { count: @room.online_room_users_count })
+                            locals: { name: @room.name, count: @room.online_room_users_count })
   end
 
   def update_user_email

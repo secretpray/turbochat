@@ -11,9 +11,8 @@ class RegistrationsController < Devise::RegistrationsController
         flash.now[:notice] = "User with '#{@user.email}' updated!"
         format.turbo_stream
         format.html { redirect_to root_path }
-        # format.html { redirect_to account_path(@user) }
       else
-        # flash.now[:alert] = @post.errors.full_messages.join('. ')
+        flash.now[:alert] = @user.errors.full_messages.join('. ')
         format.turbo_stream
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -51,9 +50,9 @@ class RegistrationsController < Devise::RegistrationsController
 
   def remove_unused_password(params)
     if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
-      params[:user].delete(:password)
-      params[:user].delete(:password_confirmation)
-      params[:user].delete(:current_password)
+       params[:user].delete(:password)
+       params[:user].delete(:password_confirmation)
+       params[:user].delete(:current_password)
     end
   end
 end

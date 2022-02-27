@@ -1,4 +1,4 @@
-<% if user.favorited?(room) %>
+<% if user&.favorited?(room) %>
   <%= button_to room_favorites_path(room.title), method: :delete,
       class: "text-gray-700 flex items-center px-2 px-1 mb-3 focus:outline-none hover:text-gray-600",
       data: {format: :turbo_stream} do %>

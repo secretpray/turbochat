@@ -3,7 +3,10 @@ class ApplicationController < ActionController::Base
   helper_method :render_flash
 
   def render_flash
-    render turbo_stream: turbo_stream.update(:flash, partial: 'shared/flash')
+    Turbo::StreamsChannel.broadcast_update_to([current_user, :rooms],
+                                              target: 'flash_container',
+                                              partial: 'shared/flash',
+                                              locals: { flash: flash })
   end
 
   protected

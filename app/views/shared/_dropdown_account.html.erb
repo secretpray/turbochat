@@ -9,17 +9,8 @@
          class="inline-block select-none outline-none">
       <span class="appearance-none flex items-center inline-block text-gray-700">
         <% if user_signed_in? %>
-          <div class="flex">
-            <span class='h-9 w-9 align-middle mr-3 rounded-full ring-2 ring-gray-700'>
-              <%= image_tag current_user.avatar.variant(:thumb), class: 'rounded-full' if current_user.avatar.attached? %>
-              <%#= AvatarPresenter.call(current_user, 40)%>
-            </span>
-            <span class='m-2'>
-              <%= user_nav_name(current_user) %>
-            </span>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="h-5 w-5 text-gray-400 mt-2" fill="currentColor">
-              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
-            </svg>
+          <div id="nav_item_<%= dom_id(current_user) %>" class='flex'>
+            <%= render 'shared/nav_user_data', user: current_user %>
           </div>
         <% end %>
       </span>
@@ -30,7 +21,6 @@
           <div class="flex w-full bg-yellow-500 items-center px-4 py-3" style="min-width: 150px; background: rgb(106, 90, 205);">
             <span class='italic my-1 text-yellow-800 font-medium mr-1'>
               <%= user_nav_name(current_user) %>
-              <%#= current_user&.email %>
             </span>
           </div>
           <%= link_to 'Profile', account_path(current_user),

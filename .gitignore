@@ -25,6 +25,9 @@
 !/tmp/storage/
 !/tmp/storage/.keep
 
+# Ignore Redis writes to disk
+/dump.rdb
+
 /public/assets
 
 # Ignore master key for decrypting credentials and more.
